@@ -17,6 +17,8 @@ RUN apt-get update && apt-get install -y \
 RUN R -e "install.packages(c('shiny', 'oaColors', 'oaPlots', 'htmltools', 'svglite', 'pryr', 'devtools'), repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages(c('glue', 'stringi', 'stringr'), repos='http://cran.rstudio.com/')"
 
+COPY .Renviron /root/.Renviron
+
 ARG CACHE_DATE=2016-01-01
 RUN R -e "devtools::install_github('lincis/poissontris')"
 

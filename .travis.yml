@@ -1,10 +1,12 @@
 dist: bionic
-
 jobs:
   include:
-    - stage: build docker image
-      script:
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -t $DOCKER_USERNAME/poissontris .
-      - docker images
-      - docker push $DOCKER_USERNAME/poissontris
+  - stage: build docker image
+    script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker build -t $DOCKER_USERNAME/poissontris .
+    - docker images
+    - docker push $DOCKER_USERNAME/poissontris
+before_install:
+- openssl aes-256-cbc -K $encrypted_f0da1fbc7955_key -iv $encrypted_f0da1fbc7955_iv
+  -in .Renviron.enc -out .Renviron -d
