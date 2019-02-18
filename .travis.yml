@@ -9,4 +9,13 @@ jobs:
     - docker push $DOCKER_USERNAME/poissontris
 before_install:
 - openssl aes-256-cbc -K $encrypted_f0da1fbc7955_key -iv $encrypted_f0da1fbc7955_iv
+  -in id_rsa.enc -out ./id_rsa -d
+- openssl aes-256-cbc -K $encrypted_f0da1fbc7955_key -iv $encrypted_f0da1fbc7955_iv
   -in .Renviron.enc -out .Renviron -d
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: chmod 600 id_rsa && ssh -o StrictHostKeyChecking=no -i id_rsa ubuntu@poissontris.linards.net ./deploy.sh
+  on:
+    branch: master
