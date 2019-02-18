@@ -2,10 +2,13 @@ dist: bionic
 
 jobs:
   include:
+    - stage: pull current image
+      script:
+      - docker pull $DOCKER_USERNAME/poissontris:latest
     - stage: build docker image
       script:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -t poissontris .
+      - docker build --cache-from $DOCKER_USERNAME/poissontris -t poissontris .
       - docker images
       - docker tag poissontris $DOCKER_USERNAME/poissontris
       - docker push $DOCKER_USERNAME/poissontris
