@@ -1,0 +1,11 @@
+dist: bionic
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t poissontris .
+      - docker images
+      - docker tag poissontris $DOCKER_USERNAME/poissontris
+      - docker push $DOCKER_USERNAME/poissontris
