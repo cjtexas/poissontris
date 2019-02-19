@@ -1,11 +1,12 @@
 dist: bionic
+
 jobs:
   include:
   - stage: build docker image
     script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker pull $DOCKER_USERNAME/poissontris:latest
-    - docker build -t $DOCKER_USERNAME/poissontris --build-arg CACHE_DATE=2019-02-19 --cache-from $DOCKER_USERNAME/poissontris:latest .
+    - docker build -t $DOCKER_USERNAME/poissontris --build-arg CACHE_DATE=$(date) --cache-from $DOCKER_USERNAME/poissontris:latest .
     - docker images
     - docker push $DOCKER_USERNAME/poissontris
 before_install:
