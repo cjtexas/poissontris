@@ -20,7 +20,8 @@ RUN R -e "install.packages(c('glue', 'stringi', 'stringr'), repos='http://cran.r
 COPY .Renviron /root/.Renviron
 
 ARG CACHE_DATE=2016-01-01
-RUN R -e "devtools::install_github('lincis/poissontris')"
+ARG REF=master
+RUN R -e "devtools::install_github('lincis/poissontris', ref = '$REF')"
 
 EXPOSE 80
 
