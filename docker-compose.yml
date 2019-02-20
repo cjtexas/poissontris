@@ -1,0 +1,10 @@
+version: '3'
+services:
+  poissontris:
+    image: linards/poissontris:latest
+    ports:
+     - "80:80"
+  poissontris-test:
+    image: linards/poissontris:test
+    ports:
+     - "8080:80"
