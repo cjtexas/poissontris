@@ -10,7 +10,7 @@ jobs:
   - stage: build docker image
     script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - id [ "$TRAVIS_BRANCH" == "master" ]; then export TAG=latest; else export TAG=$TRAVIS_BRANCH; fi
+    - if [ "$TRAVIS_BRANCH" == "master" ]; then export TAG=latest; else export TAG=$TRAVIS_BRANCH; fi
     - docker pull $DOCKER_USERNAME/poissontris:"$TAG"
     - docker build -t $DOCKER_USERNAME/poissontris:"$TAG" --build-arg CACHE_DATE="$(date)" --cache-from $DOCKER_USERNAME/poissontris:"$TAG" .
     - docker images
