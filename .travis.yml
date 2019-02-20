@@ -19,6 +19,11 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_f0da1fbc7955_key -iv $encrypted_f0da1fbc7955_iv -in secrets.tar.enc -out secrets.tar -d
   - tar xvf secrets.tar
 deploy:
-  provider: script
-  skip_cleanup: true
-  script: bash ./deploy.sh
+  - provider: script
+    script: bash ./deploy.sh poissontris
+    on:
+      branch: master
+  - provider: script
+    script: bash ./deploy.sh poissontris-test
+    on:
+      branch: test
