@@ -67,13 +67,13 @@ fluidPage(
         column(3, offset = 2,
             fluidRow(
                 column(12, 
-                    uiOutput("s1", style="max-height:80%;"), style="position:absolute;"),
+                    uiOutput("s1", style="max-height:80%;")),
                 column(12, 
-                    uiOutput("s2", style="max-height:80%;"), style="position:absolute;"),
+                    uiOutput("s2", style="max-height:80%;")),
                 column(12, 
-                    uiOutput("s3", style="max-height:80%;"), style="position:absolute;"), 
+                    uiOutput("s3", style="max-height:80%;")), 
                 column(12, 
-                    uiOutput("s4", style="max-height:80%;"), style="position:absolute;")     
+                    uiOutput("s4", style="max-height:80%;"))     
             )), 
         
         column(2,  
