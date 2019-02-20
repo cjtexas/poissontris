@@ -10,8 +10,8 @@ jobs:
   - stage: build docker image
     script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - id [ "$TRAVIS_BRANCH" == "master"]; then export TAG=latest; else export TAG=$TRAVIS_BRANCH; fi
-    - docker pull $DOCKER_USERNAME/poissontris:latest
+    - id [ "$TRAVIS_BRANCH" == "master" ]; then export TAG=latest; else export TAG=$TRAVIS_BRANCH; fi
+    - docker pull $DOCKER_USERNAME/poissontris:"$TAG"
     - docker build -t $DOCKER_USERNAME/poissontris:"$TAG" --build-arg CACHE_DATE="$(date)" --cache-from $DOCKER_USERNAME/poissontris:"$TAG" .
     - docker images
     - docker push $DOCKER_USERNAME/poissontris:"$TAG"
@@ -24,5 +24,5 @@ deploy:
   script:
   - chmod 600 id_rsa;
   - scp -o StrictHostKeyChecking=no -i id_rsa docker-compose.yml ubuntu@poissontris.linards.net:~/
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then export $SERVICE=poissontris; else $SERVICE=poissontris-$TRAVIS_BRANCH; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then export SERVICE=poissontris; else SERVICE=poissontris-"$TRAVIS_BRANCH"; fi
   - ssh -o StrictHostKeyChecking=no -i id_rsa ubuntu@poissontris.linards.net "docker-compose down; docker-compose -d up $SERVICE"
