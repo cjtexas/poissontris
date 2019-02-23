@@ -71,10 +71,10 @@ fluidPage(
                uiOutput("pdf", style="height: auto; width: 33vh;"), 
                div(class = "hidden-xs hidden-s", 
                                 
-                                h3(icon("arrow-left", class = "fa-2x"), icon("arrow-down", class = "fa-2x"),
-                                   icon("arrow-right", class = "fa-2x"),
+                                h3(icon("arrow-alt-circle-left", class = "fa-2x"), icon("arrow-alt-circle-down", class = "fa-2x"),
+                                   icon("arrow-alt-circle-right", class = "fa-2x"),
                                    ": move left, down, right"),
-                                h3(icon("arrow-up", class = "fa-2x"), ": rotate clockwise"),
+                                h3(icon("arrow-alt-circle-up", class = "fa-2x"), ": rotate clockwise"),
                                 h3("s : rotate counterclockwise"),
                                 h3("f : swap pieces")
                                 
@@ -100,7 +100,7 @@ fluidPage(
                            column(3,
                                   class = "col-xs-3",
                                   actionButton(inputId = "left", label = "", style = "display: none;"),
-                                  actionButton(inputId = "leftCounter", icon("arrow-left", class = "fa-2x"))
+                                  actionButton(inputId = "leftCounter", icon("arrow-alt-circle-left", class = "fa-2x"))
                            ),
                            column(3,
                                   class = "col-xs-3",
@@ -113,7 +113,7 @@ fluidPage(
                            column(3,
                                   class = "col-xs-3",
                                   actionButton(inputId = "right", label = "", style = "display: none;"), 
-                                  actionButton(inputId = "rightCounter", icon("arrow-right", class = "fa-2x"))
+                                  actionButton(inputId = "rightCounter", icon("arrow-alt-circle-right", class = "fa-2x"))
                            ),
                            column(3,
                                   class = "col-xs-3",
@@ -122,7 +122,7 @@ fluidPage(
                            column(3,
                                   class = "col-xs-3",
                                   actionButton(inputId = "down", label = "", style = "display: none;"),
-                                  actionButton(inputId = "downCounter", icon("arrow-down", class = "fa-2x")),
+                                  actionButton(inputId = "downCounter", icon("arrow-alt-circle-down", class = "fa-2x")),
                                   actionButton(inputId = "clicks", label = "", style = "display: none;")
                            ),
                            column(3,
@@ -130,7 +130,7 @@ fluidPage(
                                   div(
                                     onclick = "Shiny.onInputChange(\"down\", 50); Shiny.onInputChange(\"downCounter\", ++downCounter);",
                                     class = "btn btn-default action-button",
-                                    icon("arrow-down", class = "fa-2x")
+                                    icon("arrow-alt-circle-down", class = "fa-2x")
                                   )
                            ),
                            column(3,
