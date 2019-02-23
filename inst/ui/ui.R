@@ -4,7 +4,7 @@ fluidPage(
     
     tags$head(tags$title("Poissontris")), # window header
     
-    h1("poissontris - a shiny app", span("(poisson-sampled block sizes)"),
+    h1(class = "hidden-xs hidden-s", "poissontris - a shiny app", span("(poisson-sampled block sizes)"),
         img(src = "logo_text.png", style = "float:right; width:240px;")        
     ),
     
@@ -64,61 +64,89 @@ fluidPage(
     
     # TODO column around this
     fluidRow(
-        column(3, offset = 2,
+        style="max-height:95vh;",
+        column(4, offset=1,
+               class = "hidden-xs",
+               htmlOutput(outputId = "pdfTitle", container = h4),
+               uiOutput("pdf", style="height: auto; width: 33vh;"), 
+               div(class = "hidden-xs hidden-s", 
+                                
+                                h3(icon("arrow-left", class = "fa-2x"), icon("arrow-down", class = "fa-2x"),
+                                   icon("arrow-right", class = "fa-2x"),
+                                   ": move left, down, right"),
+                                h3(icon("arrow-up", class = "fa-2x"), ": rotate clockwise"),
+                                h3("s : rotate counterclockwise"),
+                                h3("f : swap pieces")
+                                
+               )
+               
+        ),
+        column(3,
             fluidRow(
                 column(12, 
-                    uiOutput("s1", style="max-height:80%;"), style="position:absolute;"),
+                    uiOutput("s2", style="height:70%;"), style="position:absolute; height:100%; width:100%;"),
                 column(12, 
-                    uiOutput("s2", style="max-height:80%;"), style="position:absolute;"),
+                    uiOutput("s3", style="height:70%;"), style="position:absolute; height:100%; width:100%;"), 
                 column(12, 
-                    uiOutput("s3", style="max-height:80%;"), style="position:absolute;"), 
+                    uiOutput("s4", style="height:70%;"), style="position:absolute; height:100%; width:100%;"),
                 column(12, 
-                    uiOutput("s4", style="max-height:80%;"), style="position:absolute;")     
+                    uiOutput("s1", style="height:70%;"), style="z-index:-1; height:100%; width:100%;"),
+                column(12,
+                       fluidRow(
+                         style = "height:30%",
+                         column(3,
+                                class = "col-xs-3",
+                                actionButton(inputId = "left", label = "", style = "display: none;"),
+                                actionButton(inputId = "leftCounter", icon("arrow-left", class = "fa-2x"))
+                         ),
+                         column(3,
+                                class = "col-xs-3",
+                                actionButton(inputId = "clock", icon("redo", class = "fa-2x"))
+                         ),
+                         column(3,
+                                class = "col-xs-3",
+                                actionButton(inputId = "counter", icon("undo", class = "fa-2x")) 
+                         ),
+                         column(3,
+                                class = "col-xs-3",
+                                actionButton(inputId = "right", label = "", style = "display: none;"), 
+                                actionButton(inputId = "rightCounter", icon("arrow-right", class = "fa-2x"))
+                         ),
+                         column(3,
+                                class = "col-xs-3",
+                                actionButton(inputId = "startGame", icon("play-circle", class = "fa-2x"))
+                         ),
+                         column(3,
+                                class = "col-xs-3",
+                                actionButton(inputId = "down", label = "", style = "display: none;"),
+                                actionButton(inputId = "downCounter", icon("arrow-down", class = "fa-2x")),
+                                actionButton(inputId = "clicks", label = "", style = "display: none;")
+                         ),
+                         column(3,
+                                class = "col-xs-3",
+                                div(
+                                  onclick = "Shiny.onInputChange(\"down\", 50); Shiny.onInputChange(\"downCounter\", ++downCounter);",
+                                  class = "btn btn-default action-button",
+                                  icon("arrow-down", class = "fa-2x")
+                                )
+                         ),
+                         column(3,
+                                class = "col-xs-3",
+                                actionButton(inputId = "swap", icon("sync", class = "fa-2x")) 
+                         )
+                       )
+                )
             )), 
         
-        column(2,  
+        column(2, offset = 1,
             
             h3(HTML("&lambda;:"), textOutput(outputId = "lambda", inline = TRUE)),
             h3(textOutput(outputId = "leftCounter")),
             h3("Score: ", textOutput(outputId = "score", inline = TRUE)),
             h3(icon("trophy", class = "fa-2x"), textOutput("highScore", inline = TRUE)),
             h4("Next Piece: ", style = "margin-top: 50px;"), 
-            uiOutput("nextPiece", style="width: 170px; height: 170px;"),
-            h4(icon("gamepad", class = "fa-2x"), "Controls: "),
-            uiOutput("controls", style="width: 170px; height: 170px;"),   
-            
-            
-            conditionalPanel("input.showButtons % 2 == 1", 
-                
-                actionButton(inputId = "left", label = ""),
-                actionButton(inputId = "leftCounter", label = ""),
-                actionButton(inputId = "down", label = ""),
-                actionButton(inputId = "downCounter", label = ""),
-                actionButton(inputId = "right", label = ""), 
-                actionButton(inputId = "rightCounter", label = ""), 
-                actionButton(inputId = "counter", label = ""), 
-                actionButton(inputId = "clock", label = ""), 
-                actionButton(inputId = "clicks", label = ""),
-                actionButton(inputId = "swap", label = ""), 
-                actionButton(inputId = "startGame", label = "")
-            
-            )
-        ), 
-        column(4, 
-            htmlOutput(outputId = "pdfTitle", container = h4),
-            uiOutput("pdf", style="height: 300px; width: 450px;"), 
-            actionButton(inputId = "showPc", label = "Show PC Controls"),
-            conditionalPanel("input.showPc % 2 == 1", 
-                
-                h3(icon("arrow-left", class = "fa-2x"), icon("arrow-down", class = "fa-2x"),
-                    icon("arrow-right", class = "fa-2x"),
-                    ": move left, down, right"),
-                h3(icon("arrow-up", class = "fa-2x"), ": rotate clockwise"),
-                h3("s : rotate counterclockwise"),
-                h3("f : swap pieces")
-            
-            )
-        
+            uiOutput("nextPiece", style="width: 170px; height: 170px;")
+            # button(onclick = "Shiny.onInputChange(\"left\", 50); Shiny.onInputChange(\"leftCounter\", ++leftCounter);", "Left"),
         )
     
     )
