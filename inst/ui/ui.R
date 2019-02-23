@@ -90,8 +90,11 @@ fluidPage(
                 class = "visible-xs",
                 h6(HTML("&lambda;:"), textOutput(outputId = "lambdaXS", inline = TRUE)),
                 h6("Score: ", textOutput(outputId = "scoreXS", inline = TRUE)),
+                h6(icon("trophy", class = "fa-2x"), textOutput("highScoreXS", inline = TRUE)),
                 h6("Next piece"),
-                uiOutput("nextPieceXS", style="width: 100%;")
+                uiOutput("nextPieceXS", style="width: 100%;"),
+                htmlOutput(outputId = "pdfTitleXS", container = h6),
+                uiOutput("pdfXS", style="height: auto; width: 100%;")
               ),
               div(
                 style = "width: 75%; padding-top:165%; position:relative",
@@ -153,9 +156,9 @@ fluidPage(
         column(2,
             
             h3(HTML("&lambda;:"), textOutput(outputId = "lambda", inline = TRUE), class = "hidden-xs"),
-            h3(textOutput(outputId = "leftCounter")),
+            # h3(textOutput(outputId = "leftCounter")),
             h3("Score: ", textOutput(outputId = "score", inline = TRUE), class = "hidden-xs"),
-            h3(icon("trophy", class = "fa-2x"), textOutput("highScore", inline = TRUE)),
+            h3(icon("trophy", class = "fa-2x"), textOutput("highScore", inline = TRUE), class = "hidden-xs"),
             h4("Next Piece: ", style = "margin-top: 50px;", class = "hidden-xs"), 
             uiOutput("nextPiece", style="width: 170px; height: 170px;", class = "hidden-xs")
             # button(onclick = "Shiny.onInputChange(\"left\", 50); Shiny.onInputChange(\"leftCounter\", ++leftCounter);", "Left"),

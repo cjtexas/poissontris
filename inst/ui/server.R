@@ -51,7 +51,8 @@ function(input, output, session) {
       xOffset = 5, 
       bg = makeBg(), 
       numShapes = 0,
-      highScore = if (file.exists("highScore.rds")) readRDS("highScore.rds") else 0)
+      highScore = if (file.exists("highScore.rds")) readRDS("highScore.rds") else 0,
+      highScoreXS = if (file.exists("highScore.rds")) readRDS("highScore.rds") else 0)
   
   
   ######################
@@ -307,8 +308,10 @@ function(input, output, session) {
             font = 1, adj = c(0.5, 1), cex = 1.4)
         dev.off()
         rv$pdf <- s() 
+        rv$pdfXS <- s() 
       })
   output[["pdf"]] <- renderUI({ HTML(rv$pdf) })
+  output[["pdfXS"]] <- renderUI({ HTML(rv$pdfXS) })
   
   
   sControl <- svgstring(standalone=FALSE, height=170/72, width=170/72)
@@ -377,7 +380,7 @@ function(input, output, session) {
           dev.off()
           rv$s3 <- s3() 
           
-          values$highScore <- if (file.exists("highScore.rds")) readRDS("highScore.rds") else 0
+          values$highScoreXS <- values$highScore <- if (file.exists("highScore.rds")) readRDS("highScore.rds") else 0
           gameOver <<- FALSE
           
         }
@@ -409,8 +412,11 @@ function(input, output, session) {
       })
   
   output$highScore <- renderText(values$highScore)
+  output$highScoreXS <- renderText(values$highScoreXS)
   
   output$pdfTitle <- renderText(paste0("Poisson PDF (&lambda; = ",
+          values$shape$lambda[1], ")"))
+  output$pdfTitleXS <- renderText(paste0("Poisson PDF (&lambda; = ",
           values$shape$lambda[1], ")"))
   
   
