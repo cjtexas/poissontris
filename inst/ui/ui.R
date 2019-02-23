@@ -81,66 +81,68 @@ fluidPage(
                )
                
         ),
-        column(3,
+        column(4,
             id = "game-container",
             fluidRow(
-              style = "max-height:85vh;",
-              column(12, 
-                    uiOutput("s2", style="height:70%;"), style="position:absolute; height:100%; width:100%; max-width:85vw; max-height:70vh;"),
+              style = "max-width:70vw; max-height:70vh;",
+              div(
+                style = "width: 80%; padding-top:180%; position:relative",
                 column(12, 
-                    uiOutput("s3", style="height:70%;"), style="position:absolute; height:100%; width:100%; max-width:85vw; max-height:70vh;"), 
+                       uiOutput("s1", style="height:100%;"), style="top: 0; left: 0; right: 0; bottom: 0; position:absolute; height:80%; width:100%;"),
                 column(12, 
-                    uiOutput("s4", style="height:70%;"), style="position:absolute; height:100%; width:100%; max-width:85vw; max-height:70vh;"),
+                      uiOutput("s2", style="height:100%;"), style="top: 0; left: 0; right: 0; bottom: 0; position:absolute; height:80%; width:100%;"),
                 column(12, 
-                    uiOutput("s1", style="height:70%;"), style="z-index:-1; height:100%; width:100%; max-width:85vw; max-height:70vh;"),
+                      uiOutput("s3", style="height:100%;"), style="top: 0; left: 0; right: 0; bottom: 0; position:absolute; height:80%; width:100%;"), 
+                column(12, 
+                      uiOutput("s4", style="height:100%;"), style="top: 0; left: 0; right: 0; bottom: 0; position:absolute; height:80%; width:100%;"),
                 column(12,
+                       style = "position: absolute; top: 80%; height:20%;",
                        fluidRow(
-                         style = "height:25%;",
-                         column(3,
-                                class = "col-xs-3",
-                                actionButton(inputId = "left", label = "", style = "display: none;"),
-                                actionButton(inputId = "leftCounter", icon("arrow-left", class = "fa-2x"))
-                         ),
-                         column(3,
-                                class = "col-xs-3",
-                                actionButton(inputId = "clock", icon("redo", class = "fa-2x"))
-                         ),
-                         column(3,
-                                class = "col-xs-3",
-                                actionButton(inputId = "counter", icon("undo", class = "fa-2x")) 
-                         ),
-                         column(3,
-                                class = "col-xs-3",
-                                actionButton(inputId = "right", label = "", style = "display: none;"), 
-                                actionButton(inputId = "rightCounter", icon("arrow-right", class = "fa-2x"))
-                         ),
-                         column(3,
-                                class = "col-xs-3",
-                                actionButton(inputId = "startGame", icon("play-circle", class = "fa-2x"))
-                         ),
-                         column(3,
-                                class = "col-xs-3",
-                                actionButton(inputId = "down", label = "", style = "display: none;"),
-                                actionButton(inputId = "downCounter", icon("arrow-down", class = "fa-2x")),
-                                actionButton(inputId = "clicks", label = "", style = "display: none;")
-                         ),
-                         column(3,
-                                class = "col-xs-3",
-                                div(
-                                  onclick = "Shiny.onInputChange(\"down\", 50); Shiny.onInputChange(\"downCounter\", ++downCounter);",
-                                  class = "btn btn-default action-button",
-                                  icon("arrow-down", class = "fa-2x")
-                                )
-                         ),
-                         column(3,
-                                class = "col-xs-3",
-                                actionButton(inputId = "swap", icon("sync", class = "fa-2x")) 
-                         )
+                           column(3,
+                                  class = "col-xs-3",
+                                  actionButton(inputId = "left", label = "", style = "display: none;"),
+                                  actionButton(inputId = "leftCounter", icon("arrow-left", class = "fa-2x"))
+                           ),
+                           column(3,
+                                  class = "col-xs-3",
+                                  actionButton(inputId = "clock", icon("redo", class = "fa-2x"))
+                           ),
+                           column(3,
+                                  class = "col-xs-3",
+                                  actionButton(inputId = "counter", icon("undo", class = "fa-2x")) 
+                           ),
+                           column(3,
+                                  class = "col-xs-3",
+                                  actionButton(inputId = "right", label = "", style = "display: none;"), 
+                                  actionButton(inputId = "rightCounter", icon("arrow-right", class = "fa-2x"))
+                           ),
+                           column(3,
+                                  class = "col-xs-3",
+                                  actionButton(inputId = "startGame", icon("play-circle", class = "fa-2x"))
+                           ),
+                           column(3,
+                                  class = "col-xs-3",
+                                  actionButton(inputId = "down", label = "", style = "display: none;"),
+                                  actionButton(inputId = "downCounter", icon("arrow-down", class = "fa-2x")),
+                                  actionButton(inputId = "clicks", label = "", style = "display: none;")
+                           ),
+                           column(3,
+                                  class = "col-xs-3",
+                                  div(
+                                    onclick = "Shiny.onInputChange(\"down\", 50); Shiny.onInputChange(\"downCounter\", ++downCounter);",
+                                    class = "btn btn-default action-button",
+                                    icon("arrow-down", class = "fa-2x")
+                                  )
+                           ),
+                           column(3,
+                                  class = "col-xs-3",
+                                  actionButton(inputId = "swap", icon("sync", class = "fa-2x")) 
+                           )
                        )
-                )
+                ))
             )), 
         
-        column(2, offset = 1,
+        column(2,
             
             h3(HTML("&lambda;:"), textOutput(outputId = "lambda", inline = TRUE)),
             h3(textOutput(outputId = "leftCounter")),
