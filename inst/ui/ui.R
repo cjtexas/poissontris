@@ -64,7 +64,7 @@ fluidPage(
     
     # TODO column around this
     fluidRow(
-        style="max-height:85vh;",
+        style="max-height:95vh;",
         column(4, offset=1,
                class = "hidden-xs",
                htmlOutput(outputId = "pdfTitle", container = h4),
@@ -83,17 +83,18 @@ fluidPage(
         ),
         column(3,
             fluidRow(
+              style = "max-width:85vh;",
+              column(12, 
+                    uiOutput("s2", style="height:70%;"), style="position:absolute; height:100%; width:100%; max-width:85vh;"),
                 column(12, 
-                    uiOutput("s2", style="height:70%;"), style="position:absolute; height:100%; width:100%;"),
+                    uiOutput("s3", style="height:70%;"), style="position:absolute; height:100%; width:100%; max-width:85vh;"), 
                 column(12, 
-                    uiOutput("s3", style="height:70%;"), style="position:absolute; height:100%; width:100%;"), 
+                    uiOutput("s4", style="height:70%;"), style="position:absolute; height:100%; width:100%; max-width:85vh;"),
                 column(12, 
-                    uiOutput("s4", style="height:70%;"), style="position:absolute; height:100%; width:100%;"),
-                column(12, 
-                    uiOutput("s1", style="height:70%;"), style="z-index:-1; height:100%; width:100%;"),
+                    uiOutput("s1", style="height:70%;"), style="z-index:-1; height:100%; width:100%; max-width:85vh;"),
                 column(12,
                        fluidRow(
-                         style = "height:30%",
+                         style = "height:30%; max-width:85vh;",
                          column(3,
                                 class = "col-xs-3",
                                 actionButton(inputId = "left", label = "", style = "display: none;"),
