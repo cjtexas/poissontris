@@ -84,9 +84,8 @@ fluidPage(
         column(4,
             id = "game-container",
             fluidRow(
-              style = "max-width:70vw; max-height:70vh;",
               div(
-                style = "width: 80%; padding-top:180%; position:relative",
+                style = "width: 75%; padding-top:165%; position:relative",
                 column(12, 
                        uiOutput("s1", style="height:100%;"), style="top: 0; left: 0; right: 0; bottom: 0; position:absolute; height:80%; width:100%;"),
                 column(12, 
