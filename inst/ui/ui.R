@@ -64,7 +64,7 @@ fluidPage(
     
     # TODO column around this
     fluidRow(
-        style="max-height:95vh;",
+        style="max-height:85vh;",
         column(4, offset=1,
                class = "hidden-xs",
                htmlOutput(outputId = "pdfTitle", container = h4),
