@@ -85,6 +85,15 @@ fluidPage(
             id = "game-container",
             fluidRow(
               div(
+                id = "xs-next-piece",
+                style = "float: right; width:25%; padding-top: 10%;",
+                class = "visible-xs",
+                h6(HTML("&lambda;:"), textOutput(outputId = "lambdaXS", inline = TRUE)),
+                h6("Score: ", textOutput(outputId = "scoreXS", inline = TRUE)),
+                h6("Next piece"),
+                uiOutput("nextPieceXS", style="width: 100%;")
+              ),
+              div(
                 style = "width: 75%; padding-top:165%; position:relative",
                 column(12, 
                        uiOutput("s1", style="height:100%;"), style="top: 0; left: 0; right: 0; bottom: 0; position:absolute; height:80%; width:100%;"),
@@ -143,12 +152,12 @@ fluidPage(
         
         column(2,
             
-            h3(HTML("&lambda;:"), textOutput(outputId = "lambda", inline = TRUE)),
+            h3(HTML("&lambda;:"), textOutput(outputId = "lambda", inline = TRUE), class = "hidden-xs"),
             h3(textOutput(outputId = "leftCounter")),
-            h3("Score: ", textOutput(outputId = "score", inline = TRUE)),
+            h3("Score: ", textOutput(outputId = "score", inline = TRUE), class = "hidden-xs"),
             h3(icon("trophy", class = "fa-2x"), textOutput("highScore", inline = TRUE)),
-            h4("Next Piece: ", style = "margin-top: 50px;"), 
-            uiOutput("nextPiece", style="width: 170px; height: 170px;")
+            h4("Next Piece: ", style = "margin-top: 50px;", class = "hidden-xs"), 
+            uiOutput("nextPiece", style="width: 170px; height: 170px;", class = "hidden-xs")
             # button(onclick = "Shiny.onInputChange(\"left\", 50); Shiny.onInputChange(\"leftCounter\", ++leftCounter);", "Left"),
         )
     
