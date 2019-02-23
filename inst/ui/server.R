@@ -28,8 +28,8 @@ function(input, output, session) {
   counterCounterOld <- 0
   
   # game data
-  lambda <- 3.5
-  score <- 0
+  lambdaXS <- lambda <- 3.5
+  scoreXS <- score <- 0
   pieceMoved <<- TRUE
   
   # plot reactive value
@@ -51,7 +51,8 @@ function(input, output, session) {
       xOffset = 5, 
       bg = makeBg(), 
       numShapes = 0,
-      highScore = if (file.exists("highScore.rds")) readRDS("highScore.rds") else 0)
+      highScore = if (file.exists("highScore.rds")) readRDS("highScore.rds") else 0,
+      highScoreXS = if (file.exists("highScore.rds")) readRDS("highScore.rds") else 0)
   
   
   ######################
@@ -178,8 +179,8 @@ function(input, output, session) {
               # clear lines and change score
               linesCleared <- clearLines(values)
               if(linesCleared > 0) {
-                score <<- score + lambda + (linesCleared-1)*2*lambda
-                lambda <<- lambda + 0.25 * linesCleared
+                scoreXS <<- score <<- score + lambda + (linesCleared-1)*2*lambda
+                lambdaXS <<- lambda <<- lambda + 0.25 * linesCleared
               }
               values$numShapes <- values$numShapes + 1
               
@@ -273,9 +274,10 @@ function(input, output, session) {
         plotShape(nextPiece$shape, xOffset = 0,
             yOffset = 0)
         dev.off()
-        rv$nextPiece <- s() 
+        rv$nextPiece <- rv$nextPieceXS <- s() 
       })
   output[["nextPiece"]] <- renderUI({ HTML(rv$nextPiece) })
+  output[["nextPieceXS"]] <- renderUI({ HTML(rv$nextPieceXS) })
   
   observeEvent(values$shape, {
         s <- svgstring(standalone=FALSE, height=300/72, width=450/72)
@@ -306,8 +308,10 @@ function(input, output, session) {
             font = 1, adj = c(0.5, 1), cex = 1.4)
         dev.off()
         rv$pdf <- s() 
+        rv$pdfXS <- s() 
       })
   output[["pdf"]] <- renderUI({ HTML(rv$pdf) })
+  output[["pdfXS"]] <- renderUI({ HTML(rv$pdfXS) })
   
   
   sControl <- svgstring(standalone=FALSE, height=170/72, width=170/72)
@@ -344,8 +348,8 @@ function(input, output, session) {
         
         if(gameOver) {     
           
-          lambda <<- 3.5
-          score <<- 0
+          lambdaXS <<- lambda <<- 3.5
+          scoreXS<<- score <<- 0
           
           values$yOffset <- 20
           values$shape <- makeShape(lambda)
@@ -376,7 +380,7 @@ function(input, output, session) {
           dev.off()
           rv$s3 <- s3() 
           
-          values$highScore <- if (file.exists("highScore.rds")) readRDS("highScore.rds") else 0
+          values$highScoreXS <- values$highScore <- if (file.exists("highScore.rds")) readRDS("highScore.rds") else 0
           gameOver <<- FALSE
           
         }
@@ -403,11 +407,16 @@ function(input, output, session) {
   observeEvent(values$numShapes, {
         output$lambda <- renderText(lambda)
         output$score <- renderText(score)
+        output$lambdaXS <- renderText(lambdaXS)
+        output$scoreXS <- renderText(scoreXS)
       })
   
   output$highScore <- renderText(values$highScore)
+  output$highScoreXS <- renderText(values$highScoreXS)
   
   output$pdfTitle <- renderText(paste0("Poisson PDF (&lambda; = ",
+          values$shape$lambda[1], ")"))
+  output$pdfTitleXS <- renderText(paste0("Poisson PDF (&lambda; = ",
           values$shape$lambda[1], ")"))
   
   

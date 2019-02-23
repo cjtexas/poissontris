@@ -21,11 +21,11 @@ before_install:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: bash ./deploy.sh poissontris
+    script: bash ./deploy.sh "$DEPLOY_HOST" poissontris
     on:
       branch: master
   - provider: script
     skip_cleanup: true
-    script: bash ./deploy.sh poissontris-test
+    script: bash ./deploy.sh "$DEPLOY_HOST" poissontris-test
     on:
       branch: test
