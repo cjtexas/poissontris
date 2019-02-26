@@ -14,6 +14,8 @@ services:
       - VIRTUAL_HOST=${POISSONTRIS_HOST}
       - LETSENCRYPT_HOST=${POISSONTRIS_HOST}
       - LETSENCRYPT_EMAIL=${ADMIN_EMAIL}
+    entrypoint: "/bin/bash"
+    command: "cd /usr/lib/poissontris; R -e \"options(shiny.port = 80, shiny.host = '0.0.0.0'); library(poissontris); runPoissontris()\""
   poissontris-test:
     image: linards/poissontris:test
     expose:
@@ -24,6 +26,8 @@ services:
       - VIRTUAL_HOST=${POISSONTRIS_TEST_HOST}
       - LETSENCRYPT_HOST=${POISSONTRIS_TEST_HOST}
       - LETSENCRYPT_EMAIL=${ADMIN_EMAIL}
+    entrypoint: "/bin/bash"
+    command: "cd /usr/lib/poissontris; R -e \"options(shiny.port = 80, shiny.host = '0.0.0.0'); library(poissontris); runPoissontris()\""
 
 networks:
   default:

@@ -25,5 +25,5 @@ RUN R -e "devtools::install_github('lincis/poissontris', ref = '$REF')"
 
 EXPOSE 80
 
-ENTRYPOINT [ "R", "-e", "options(shiny.port = 80, shiny.host = '0.0.0.0'); library(poissontris); runPoissontris()" ]
+ENTRYPOINT [ "/bin/bash" ]
 # CMD ["R", -e \"options(shiny.port = 80, shiny.host = '0.0.0.0'); library(poissontris); runPoissontris()\""]
