@@ -9,6 +9,7 @@ runPoissontris <- function(){
 #	setwd(tmpDir)
 	library(shiny)
 	uiDir <- system.file("ui", package = "poissontris")
+	working_dir <<- getwd()
   setwd(uiDir)
 #	uiFiles <- list.files(path = uiDir, full.names = FALSE, recursive = TRUE)
 #	
