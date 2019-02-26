@@ -1,10 +1,31 @@
-version: '3'
+version: '2'
+volumes:
+  poissontris:
+  poissontris-test:
+
 services:
   poissontris:
     image: linards/poissontris:latest
-    ports:
-     - "80:80"
+    expose:
+     - 80
+    volumes:
+     - poissontris:/usr/lib/poissontris
+    environment:
+      - VIRTUAL_HOST=${POISSONTRIS_HOST}
+      - LETSENCRYPT_HOST=${POISSONTRIS_HOST}
+      - LETSENCRYPT_EMAIL=${ADMIN_EMAIL}
   poissontris-test:
     image: linards/poissontris:test
-    ports:
-     - "8080:80"
+    expose:
+     - 80
+    volumes:
+     - poissontris-test:/usr/lib/poissontris
+    environment:
+      - VIRTUAL_HOST=${POISSONTRIS_TEST_HOST}
+      - LETSENCRYPT_HOST=${POISSONTRIS_TEST_HOST}
+      - LETSENCRYPT_EMAIL=${ADMIN_EMAIL}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
