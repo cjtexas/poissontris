@@ -15,7 +15,7 @@ services:
       - LETSENCRYPT_HOST=${POISSONTRIS_HOST}
       - LETSENCRYPT_EMAIL=${ADMIN_EMAIL}
     working_dir: "/usr/lib/poissontris"
-    command: "cd /usr/lib/poissontris; R -e \"options(shiny.port = 80, shiny.host = '0.0.0.0'); library(poissontris); runPoissontris()\""
+    command: "R -e \"options(shiny.port = 80, shiny.host = '0.0.0.0'); library(poissontris); runPoissontris()\""
   poissontris-test:
     image: linards/poissontris:test
     expose:
