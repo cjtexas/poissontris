@@ -5,6 +5,7 @@ volumes:
 
 services:
   poissontris:
+    restart: always
     image: linards/poissontris:latest
     expose:
      - 80
@@ -17,6 +18,7 @@ services:
     working_dir: "/usr/lib/poissontris"
     command: "R -e \"options(shiny.port = 80, shiny.host = '0.0.0.0'); library(poissontris); runPoissontris()\""
   poissontris-test:
+    restart: always
     image: linards/poissontris:test
     expose:
      - 80
